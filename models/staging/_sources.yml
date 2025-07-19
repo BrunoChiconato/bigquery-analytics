@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    description: "Fonte de dados do sistema principal da loja, simulado pelos arquivos seeds."
+    database: "{{ target.project }}"
+    schema: bigquery_analytics_raw
+    tables:
+      - name: raw_customers
+        description: "Dados brutos dos clientes."
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+      - name: raw_orders_2023
+        description: "Dados brutos de pedidos de 2023."
+      - name: raw_orders_2024
+        description: "Dados brutos de pedidos de 2024."
+      - name: raw_products
+        description: "Dados brutos dos produtos."
+        columns:
+          - name: sku
+            tests:
+              - unique
+              - not_null
+      - name: raw_stores
+        description: "Dados brutos das lojas."
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+      - name: raw_supplies
+        description: "Dados brutos de suprimentos."

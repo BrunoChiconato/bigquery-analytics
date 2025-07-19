@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop__customers
+    description: "Modelo de staging para clientes. Uma linha por cliente."
+    columns:
+      - name: customer_id
+        description: "Chave primária dos clientes."
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_jaffle_shop__orders
+    description: "Modelo de staging para pedidos. Uma linha por pedido."
+    columns:
+      - name: order_id
+        description: "Chave primária dos pedidos."
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Chave estrangeira para stg_jaffle_shop__customers."
+        tests:
+          - relationships:
+              to: ref('stg_jaffle_shop__customers')
+              field: customer_id
+      - name: store_id
+        description: "Chave estrangeira para stg_jaffle_shop__stores."
+        tests:
+          - relationships:
+              to: ref('stg_jaffle_shop__stores')
+              field: store_id
+
+  - name: stg_jaffle_shop__products
+    description: "Modelo de staging para produtos. Uma linha por produto."
+    columns:
+      - name: product_id
+        description: "Chave primária dos produtos."
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_jaffle_shop__stores
+    description: "Modelo de staging para lojas. Uma linha por loja."
+    columns:
+      - name: store_id
+        description: "Chave primária das lojas."
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_jaffle_shop__supplies
+    description: "Modelo de staging para suprimentos, deduplicado. Uma linha por supply_id."
+    columns:
+      - name: supply_id
+        description: "Chave primária dos suprimentos."
+        tests:
+          - unique
+          - not_null
