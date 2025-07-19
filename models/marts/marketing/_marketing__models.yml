@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: >
+      Tabela dimensional de clientes. Contém uma linha por cliente, com
+      informações demográficas e métricas de negócio agregadas como LTV (Lifetime Value).
+    columns:
+      - name: customer_id
+        description: "Chave primária de clientes."
+        tests:
+          - unique
+          - not_null

@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Tabela de fatos principal, contendo o registro de cada pedido. Uma linha por pedido."
+    columns:
+      - name: order_id
+        description: "Chave primária da tabela, identificador do pedido."
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Chave estrangeira para a dimensão de clientes."
+        tests:
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
